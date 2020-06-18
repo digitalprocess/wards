@@ -4,6 +4,7 @@ import L from 'leaflet'
 const Map = ({
 	id,
 	zoom,
+	data,
 	width,
 	center,
 	height,
@@ -20,8 +21,15 @@ const Map = ({
 					attribution: '&copy; <a href="https://osm.org/copyright">OpenStreetMap</a> contributors',
 					minZoom,
 					maxZoom,
+				}),
+				L.geoJSON(data).bindPopup(layer => {
+					const { ward, alderman } = layer.feature.properties
+
+					return(
+						`<h2>WARD ${ward}</h2><h3>${alderman}</h3>`
+					)
 				})
-			],
+			]
 		})
 
 		// marker
@@ -67,7 +75,7 @@ const Map = ({
 			// "Error: Map container is already initialized."
 			if (map) map.remove()
 		}
-	}, [id, zoom, center, minZoom, maxZoom, markers])
+	}, [id, data, zoom, center, minZoom, maxZoom, markers])
 
 	return (
 		<div
