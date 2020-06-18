@@ -26,7 +26,8 @@ const Map = ({
 					const { ward, alderman } = layer.feature.properties
 
 					return(
-						`<h2>WARD ${ward}</h2><h3>${alderman}</h3>`
+						`<h2>WARD ${ward}</h2>
+						${alderman ? `<h3>${alderman}</h3>` : ''}`
 					)
 				})
 			]
